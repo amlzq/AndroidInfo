@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.amlzq.androidmonitor"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 21
         versionCode 1
         versionName "0.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

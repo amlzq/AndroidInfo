@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.amlzq.androidmonitor">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,7 +21,10 @@
         </activity>
         <activity
             android:name=".OSBuildActivity"
-            android:label="OS Build" />
+            android:label="OS build" />
+        <activity
+            android:name=".TelephonyActivity"
+            android:label="Telephony" />
     </application>
 
 </manifest>

@@ -13,7 +13,11 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
     }
 
-    public void onDeviceClick(View view) {
+    public void onOSBuildClick(View view) {
         startActivity(new Intent(this, OSBuildActivity.class));
+    }
+
+    public void onTelephonyClick(View view) {
+        startActivity(new Intent(this, TelephonyActivity.class));
     }
 }
