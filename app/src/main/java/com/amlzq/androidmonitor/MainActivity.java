@@ -20,4 +20,8 @@ public class MainActivity extends Activity {
     public void onTelephonyClick(View view) {
         startActivity(new Intent(this, TelephonyActivity.class));
     }
+
+    public void onDisplayClick(View view) {
+        startActivity(new Intent(this, DisplayActivity.class));
+    }
 }

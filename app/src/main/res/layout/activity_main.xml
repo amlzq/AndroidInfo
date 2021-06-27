@@ -16,4 +16,10 @@
         android:layout_height="wrap_content"
         android:onClick="onTelephonyClick"
         android:text="Telephony" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onDisplayClick"
+        android:text="Display" />
 </LinearLayout>

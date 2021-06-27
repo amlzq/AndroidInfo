@@ -46,6 +46,15 @@ public class OSBuildActivity extends Activity {
             builder.append("supported_32_bit_abis " + Arrays.toString(Build.SUPPORTED_32_BIT_ABIS) + "\n");
             builder.append("supported_64_bit_abis " + Arrays.toString(Build.SUPPORTED_64_BIT_ABIS) + "\n");
         }
+        builder.append("version_sdk_int " + Build.VERSION.SDK_INT + "\n");
+        builder.append("version_code_name " + Build.VERSION.CODENAME + "\n");
+        builder.append("version_incremental " + Build.VERSION.INCREMENTAL + "\n");
+        builder.append("version_release " + Build.VERSION.RELEASE + "\n");
+        builder.append("version_release " + Build.VERSION.RELEASE + "\n");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            builder.append("version_security_patch " + Build.VERSION.SECURITY_PATCH + "\n");
+            builder.append("version_preview_sdk_int " + Build.VERSION.PREVIEW_SDK_INT + "\n");
+        }
         textView.setText(builder.toString());
     }
 }
