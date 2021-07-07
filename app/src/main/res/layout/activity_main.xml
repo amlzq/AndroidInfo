@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.amlzq.androidmonitor.MainActivity">
 
     <Button
@@ -22,4 +23,10 @@
         android:layout_height="wrap_content"
         android:onClick="onDisplayClick"
         android:text="Display" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onPackageClick"
+        android:text="Packages" />
 </LinearLayout>

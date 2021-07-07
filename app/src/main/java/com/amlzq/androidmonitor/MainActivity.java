@@ -24,4 +24,8 @@ public class MainActivity extends Activity {
     public void onDisplayClick(View view) {
         startActivity(new Intent(this, DisplayActivity.class));
     }
+
+    public void onPackageClick(View view) {
+        startActivity(new Intent(this, PackagesActivity.class));
+    }
 }

@@ -30,6 +30,13 @@
             android:name=".DisplayActivity"
             android:configChanges="orientation"
             android:label="Display" />
+        <activity
+            android:name=".PackagesActivity"
+            android:label="Packages"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".PkgDetailActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
     </application>
 
 </manifest>
