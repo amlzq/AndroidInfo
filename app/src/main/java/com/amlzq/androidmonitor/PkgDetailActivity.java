@@ -1,7 +1,6 @@
 package com.amlzq.androidmonitor;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -24,13 +23,14 @@ import java.security.MessageDigest;
 
 public class PkgDetailActivity extends Activity {
     private PackageManager manager;
+    private PackageInfo item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pkg_detail);
 
-        PackageInfo item = getIntent().getParcelableExtra("item");
+        item = getIntent().getParcelableExtra("item");
         ApplicationInfo appInfo = item.applicationInfo;
         manager = getPackageManager();
 
@@ -73,17 +73,17 @@ public class PkgDetailActivity extends Activity {
         findViewById(R.id.app_details).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = getAppDetailsSettingsIntent(PkgDetailActivity.this);
+                Intent intent = getAppDetailsSettingsIntent(PkgDetailActivity.this, item.packageName);
                 startActivity(intent);
             }
         });
     }
 
-    public Intent getAppDetailsSettingsIntent(Context context) {
+    public Intent getAppDetailsSettingsIntent(Context context, String packageName) {
         Intent intent = new Intent();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
             intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-            intent.setData(Uri.fromParts("package", context.getPackageName(), null));
+            intent.setData(Uri.fromParts("package", packageName, null));
         } else {
             intent.setAction(Intent.ACTION_VIEW);
             intent.setClassName("com.android.settings", "com.android.settings.InstalledAppDetails");

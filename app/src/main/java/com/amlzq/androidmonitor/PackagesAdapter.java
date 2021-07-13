@@ -58,7 +58,7 @@ public class PackagesAdapter extends BaseAdapter {
         ViewHolder holder;
         if (null == convertView) {
             holder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.item_app, parent, false);
+            convertView = mInflater.inflate(R.layout.item_package, parent, false);
             holder.mIcon = (ImageView) convertView.findViewById(R.id.icon);
             holder.mAction = (ImageButton) convertView.findViewById(R.id.action);
             holder.mName = (TextView) convertView.findViewById(R.id.name);
