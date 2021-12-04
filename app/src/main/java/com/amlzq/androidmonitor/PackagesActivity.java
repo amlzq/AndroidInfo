@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -38,7 +40,7 @@ public class PackagesActivity extends Activity {
 
         final PackageManager manager = getPackageManager();
         final List<PackageInfo> packages = manager.getInstalledPackages(PackageManager.COMPONENT_ENABLED_STATE_DEFAULT);
-        mAdapter = new PackagesAdapter(this, packages, mListView);
+        mAdapter = new PackagesAdapter(this, packages);
         mAdapter.setClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +55,27 @@ public class PackagesActivity extends Activity {
             }
         });
         mListView.setAdapter(mAdapter);
+        mListView.setTextFilterEnabled(true);
+
+        SearchView searchView = (SearchView) findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (TextUtils.isEmpty(newText)) {
+                    mListView.clearTextFilter();
+                    // mAdapter.getFilter().filter("");
+                } else {
+                    mListView.setFilterText(newText);
+                    // mAdapter.getFilter().filter(newText);
+                }
+                return true;
+            }
+        });
     }
 
 }

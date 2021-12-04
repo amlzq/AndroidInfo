@@ -4,36 +4,39 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by amlzq on 2021/6/28.
  */
 
-public class PackagesAdapter extends BaseAdapter {
+public class PackagesAdapter extends BaseAdapter implements Filterable {
 
     private final Context mContext;
-    private final List<PackageInfo> mData;
-    private final ListView mListView;
+    private List<PackageInfo> mData;
+    private final List<PackageInfo> mDataBackup;
 
     private LayoutInflater mInflater;
     private View.OnClickListener mClickListener;
     private PackageManager manager;
 
 
-    public PackagesAdapter(Context context, List<PackageInfo> data, ListView listView) {
+    public PackagesAdapter(Context context, List<PackageInfo> data) {
         this.mContext = context;
         this.mData = data;
-        this.mListView = listView;
+        this.mDataBackup = data;
         this.mInflater = LayoutInflater.from(mContext);
         this.manager = context.getPackageManager();
     }
@@ -100,6 +103,46 @@ public class PackagesAdapter extends BaseAdapter {
         TextView mPkg;
         TextView mVersion;
         PackageInfo mItem;
+    }
+
+    private PackagesFilter mFilter;
+
+    @Override
+    public Filter getFilter() {
+        if (mFilter == null) {
+            mFilter = new PackagesFilter();
+        }
+        return mFilter;
+    }
+
+    class PackagesFilter extends Filter {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            FilterResults results = new FilterResults();
+            List<PackageInfo> newData;
+            if (TextUtils.isEmpty(charSequence)) {
+                newData = mDataBackup;
+            } else {
+                newData = new ArrayList<>();
+                for (PackageInfo info : mDataBackup) {
+                    if (info.packageName.contains(charSequence)) newData.add(info);
+                }
+            }
+            results.values = newData;
+            results.count = newData.size();
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            mData = (List<PackageInfo>) filterResults.values;
+            if (filterResults.count > 0) {
+                notifyDataSetChanged();
+            } else {
+                notifyDataSetInvalidated();
+            }
+        }
     }
 
 }

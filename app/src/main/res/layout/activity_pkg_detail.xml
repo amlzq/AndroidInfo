@@ -9,11 +9,27 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:mipmap/sym_def_app_icon" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                android:src="@android:mipmap/sym_def_app_icon" />
+
+            <Button
+                android:id="@+id/app_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="Details" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/name"
@@ -24,7 +40,8 @@
         <TextView
             android:id="@+id/pkg"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textIsSelectable="true" />
 
 
         <TextView
@@ -36,7 +53,8 @@
         <TextView
             android:id="@+id/sign"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textIsSelectable="true" />
 
         <TextView
             android:id="@+id/pkg_info"
@@ -49,11 +67,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp" />
-
-        <Button
-            android:id="@+id/app_details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="App details" />
     </LinearLayout>
 </ScrollView>
