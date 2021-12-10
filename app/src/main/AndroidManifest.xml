@@ -37,6 +37,9 @@
         <activity
             android:name=".PkgDetailActivity"
             android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".StorageActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
     </application>
 
 </manifest>

@@ -29,4 +29,10 @@
         android:layout_height="wrap_content"
         android:onClick="onPackageClick"
         android:text="Packages" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onStorageClick"
+        android:text="Storage" />
 </LinearLayout>

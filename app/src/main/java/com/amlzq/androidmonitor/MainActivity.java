@@ -28,4 +28,8 @@ public class MainActivity extends Activity {
     public void onPackageClick(View view) {
         startActivity(new Intent(this, PackagesActivity.class));
     }
+
+    public void onStorageClick(View view) {
+        startActivity(new Intent(this, StorageActivity.class));
+    }
 }
