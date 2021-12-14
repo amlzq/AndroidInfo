@@ -5,8 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.amlzq.androidmonitor.R;
-
 import java.util.Arrays;
 
 /**
@@ -20,7 +18,6 @@ public class OSBuildActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_osbuild);
 
-        TextView textView = (TextView) findViewById(R.id.text_view);
         StringBuilder builder = new StringBuilder();
         builder.append("manufacturer " + Build.MANUFACTURER + "\n");
         builder.append("brand " + Build.BRAND + "\n");
@@ -55,6 +52,8 @@ public class OSBuildActivity extends Activity {
             builder.append("version_security_patch " + Build.VERSION.SECURITY_PATCH + "\n");
             builder.append("version_preview_sdk_int " + Build.VERSION.PREVIEW_SDK_INT + "\n");
         }
+
+        TextView textView = (TextView) findViewById(R.id.text_view);
         textView.setText(builder.toString());
     }
 }

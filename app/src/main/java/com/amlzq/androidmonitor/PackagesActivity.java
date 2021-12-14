@@ -16,6 +16,8 @@ import java.util.List;
 
 /**
  * Created by amlzq on 2021/6/28.
+ * <p>
+ * Show ApplicationInfo/PackageInfo class info
  */
 
 public class PackagesActivity extends Activity {

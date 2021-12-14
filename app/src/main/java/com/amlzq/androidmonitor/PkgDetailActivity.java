@@ -53,11 +53,11 @@ public class PkgDetailActivity extends Activity {
             Signature signature = info.signatures[0];
             byte[] byteArray = signature.toByteArray();
             String md5 = encode("MD5", byteArray);
-            builder.append("MD5: " + md5 + "\n");
+            builder.append("MD5:\n" + md5 + "\n");
             String sha1 = encode("SHA1", byteArray);
-            builder.append("SHA1: " + sha1 + "\n");
+            builder.append("SHA1:\n" + sha1 + "\n");
             String sha256 = encode("SHA256", byteArray);
-            builder.append("SHA256: " + sha256 + "\n");
+            builder.append("SHA256:\n" + sha256 + "\n");
         } catch (Exception e) {
             e.printStackTrace();
         }

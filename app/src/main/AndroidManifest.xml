@@ -3,9 +3,12 @@
     package="com.amlzq.androidmonitor">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -39,7 +42,10 @@
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name=".StorageActivity"
-            android:theme="@android:style/Theme.NoTitleBar" />
+            android:label="Storage" />
+        <activity
+            android:name=".NetworkActivity"
+            android:label="Network" />
     </application>
 
 </manifest>

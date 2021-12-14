@@ -9,7 +9,7 @@
         android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:queryHint="com.example.myapplication" />
+        android:queryHint="e.g. com.example.name" />
 
     <ListView
         android:id="@+id/list_view"

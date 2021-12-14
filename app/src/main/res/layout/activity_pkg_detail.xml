@@ -54,7 +54,8 @@
             android:id="@+id/sign"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textIsSelectable="true" />
+            android:textIsSelectable="true"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/pkg_info"

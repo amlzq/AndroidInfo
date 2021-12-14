@@ -32,4 +32,8 @@ public class MainActivity extends Activity {
     public void onStorageClick(View view) {
         startActivity(new Intent(this, StorageActivity.class));
     }
+
+    public void onNetworkClick(View view) {
+        startActivity(new Intent(this, NetworkActivity.class));
+    }
 }
