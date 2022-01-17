@@ -1,2 +1,3 @@
-# AndroidMonitor
-An assistant for developers to visualize the details of Android.
+# AndroidInfo
+
+An assistant for developers to visualize the info of Android.

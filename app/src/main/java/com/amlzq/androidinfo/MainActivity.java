@@ -1,4 +1,4 @@
-package com.amlzq.androidmonitor;
+package com.amlzq.androidinfo;
 
 import android.app.Activity;
 import android.content.Intent;

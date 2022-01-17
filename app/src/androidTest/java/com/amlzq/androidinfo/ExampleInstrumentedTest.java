@@ -1,4 +1,4 @@
-package com.amlzq.androidmonitor;
+package com.amlzq.androidinfo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.amlzq.androidmonitor", appContext.getPackageName());
+        assertEquals("com.amlzq.androidinfo", appContext.getPackageName());
     }
 }

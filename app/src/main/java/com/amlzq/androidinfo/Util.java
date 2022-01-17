@@ -1,4 +1,4 @@
-package com.amlzq.androidmonitor;
+package com.amlzq.androidinfo;
 
 import java.util.Arrays;
 
