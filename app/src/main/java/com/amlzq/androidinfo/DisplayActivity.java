@@ -50,11 +50,11 @@ public class DisplayActivity extends Activity {
         TextView textView = (TextView) findViewById(R.id.text_view);
         StringBuilder builder = new StringBuilder();
         final DisplayMetrics metrics = getResources().getDisplayMetrics();
-        builder.append("density: " + metrics.density + "\n");
-        builder.append("scaled_density: " + metrics.scaledDensity + "\n");
-        builder.append("width_pixels: " + metrics.widthPixels + "\n");
-        builder.append("height_pixels: " + metrics.heightPixels + "\n");
-        builder.append("orientation_name: " + getOrientationName(getResources().getConfiguration().orientation) + "\n");
+        builder.append("density=" + metrics.density + "\n");
+        builder.append("scaledDensity=" + metrics.scaledDensity + "\n");
+        builder.append("scaledDensity=" + metrics.scaledDensity + "\n");
+        builder.append("heightPixels=" + metrics.heightPixels + "\n");
+        builder.append("orientationName=" + getOrientationName(getResources().getConfiguration().orientation) + "\n");
         textView.setText(builder.toString());
     }
 }

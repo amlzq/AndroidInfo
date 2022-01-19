@@ -3,11 +3,9 @@
     package="com.amlzq.androidinfo">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -46,6 +44,9 @@
         <activity
             android:name=".NetworkActivity"
             android:label="Network" />
+        <activity
+            android:name=".MemoryActivity"
+            android:label="Memory" />
     </application>
 
 </manifest>

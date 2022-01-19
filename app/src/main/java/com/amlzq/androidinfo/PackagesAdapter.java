@@ -126,7 +126,8 @@ public class PackagesAdapter extends BaseAdapter implements Filterable {
             } else {
                 newData = new ArrayList<>();
                 for (PackageInfo info : mDataBackup) {
-                    if (info.packageName.contains(charSequence)) newData.add(info);
+                    String label = info.applicationInfo.loadLabel(manager).toString();
+                    if (label.contains(charSequence)) newData.add(info);
                 }
             }
             results.values = newData;

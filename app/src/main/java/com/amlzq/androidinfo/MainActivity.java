@@ -36,4 +36,8 @@ public class MainActivity extends Activity {
     public void onNetworkClick(View view) {
         startActivity(new Intent(this, NetworkActivity.class));
     }
+
+    public void onMemoryClick(View view) {
+        startActivity(new Intent(this, MemoryActivity.class));
+    }
 }

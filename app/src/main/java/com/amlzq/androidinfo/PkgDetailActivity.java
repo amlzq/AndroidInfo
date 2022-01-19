@@ -53,11 +53,11 @@ public class PkgDetailActivity extends Activity {
             Signature signature = info.signatures[0];
             byte[] byteArray = signature.toByteArray();
             String md5 = encode("MD5", byteArray);
-            builder.append("MD5:\n" + md5 + "\n");
+            builder.append("MD5=" + md5 + "\n");
             String sha1 = encode("SHA1", byteArray);
-            builder.append("SHA1:\n" + sha1 + "\n");
+            builder.append("SHA1=" + sha1 + "\n");
             String sha256 = encode("SHA256", byteArray);
-            builder.append("SHA256:\n" + sha256 + "\n");
+            builder.append("SHA256=" + sha256 + "\n");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -115,78 +115,78 @@ public class PkgDetailActivity extends Activity {
 
     private String toString(PackageInfo info) {
         StringBuilder builder = new StringBuilder();
-        builder.append("activities.length: " + Util.getLength(info.activities) + "\n");
-        builder.append("applicationInfo: " + info.applicationInfo + "\n");
+        builder.append("activities.length=" + Util.getLength(info.activities) + "\n");
+        builder.append("applicationInfo=" + info.applicationInfo + "\n");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
-            builder.append("baseRevisionCode: " + info.baseRevisionCode + "\n");
+            builder.append("baseRevisionCode=" + info.baseRevisionCode + "\n");
         }
-        builder.append("configPreferences.length: " + Util.getLength(info.configPreferences) + "\n");
+        builder.append("configPreferences.length=" + Util.getLength(info.configPreferences) + "\n");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder.append("featureGroups.length: " + Util.getLength(info.featureGroups) + "\n");
+            builder.append("featureGroups.length=" + Util.getLength(info.featureGroups) + "\n");
         }
-        builder.append("firstInstallTime: " + info.firstInstallTime + "\n");
-        builder.append("gids: " + Util.toString(info.gids) + "\n");
+        builder.append("firstInstallTime=" + info.firstInstallTime + "\n");
+        builder.append("gids=" + Util.toString(info.gids) + "\n");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder.append("installLocation: " + info.installLocation + "\n");
+            builder.append("installLocation=" + info.installLocation + "\n");
         }
-        builder.append("instrumentation.length: " + Util.getLength(info.instrumentation) + "\n");
-        builder.append("lastUpdateTime: " + info.lastUpdateTime + "\n");
-        builder.append("packageName: " + info.packageName + "\n");
-        builder.append("permissions.length: " + Util.getLength(info.permissions) + "\n");
-        builder.append("providers.length: " + Util.getLength(info.providers) + "\n");
-        builder.append("receivers.length: " + Util.getLength(info.receivers) + "\n");
-        builder.append("reqFeatures.length: " + Util.getLength(info.reqFeatures) + "\n");
-        builder.append("requestedPermissions: " + Util.toString(info.requestedPermissions) + "\n");
+        builder.append("instrumentation.length=" + Util.getLength(info.instrumentation) + "\n");
+        builder.append("lastUpdateTime=" + info.lastUpdateTime + "\n");
+        builder.append("packageName=" + info.packageName + "\n");
+        builder.append("permissions.length=" + Util.getLength(info.permissions) + "\n");
+        builder.append("providers.length=" + Util.getLength(info.providers) + "\n");
+        builder.append("receivers.length=" + Util.getLength(info.receivers) + "\n");
+        builder.append("reqFeatures.length=" + Util.getLength(info.reqFeatures) + "\n");
+        builder.append("requestedPermissions=" + Util.toString(info.requestedPermissions) + "\n");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            builder.append("requestedPermissionsFlags: " + Util.toString(info.requestedPermissionsFlags) + "\n");
+            builder.append("requestedPermissionsFlags=" + Util.toString(info.requestedPermissionsFlags) + "\n");
         }
-        builder.append("services.length: " + Util.getLength(info.services) + "\n");
-        builder.append("sharedUserId: " + info.sharedUserId + "\n");
-        builder.append("sharedUserLabel: " + info.sharedUserLabel + "\n");
-        builder.append("signatures.length: " + Util.getLength(info.signatures) + "\n");
+        builder.append("services.length=" + Util.getLength(info.services) + "\n");
+        builder.append("sharedUserId=" + info.sharedUserId + "\n");
+        builder.append("sharedUserLabel=" + info.sharedUserLabel + "\n");
+        builder.append("signatures.length=" + Util.getLength(info.signatures) + "\n");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder.append("splitNames: " + Util.toString(info.splitNames) + "\n");
+            builder.append("splitNames=" + Util.toString(info.splitNames) + "\n");
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
-            builder.append("splitRevisionCodes: " + Util.toString(info.splitRevisionCodes) + "\n");
+            builder.append("splitRevisionCodes=" + Util.toString(info.splitRevisionCodes) + "\n");
         }
-        builder.append("versionCode: " + info.versionCode + "\n");
-        builder.append("versionName: " + info.versionName + "\n");
+        builder.append("versionCode=" + info.versionCode + "\n");
+        builder.append("versionName=" + info.versionName + "\n");
         return builder.toString();
     }
 
     private String toString(ApplicationInfo info) {
         StringBuilder builder = new StringBuilder();
-        builder.append("backupAgentName: " + info.backupAgentName + "\n");
-        builder.append("className: " + info.className + "\n");
-        builder.append("compatibleWidthLimitDp: " + info.compatibleWidthLimitDp + "\n");
-        builder.append("dataDir: " + info.dataDir + "\n");
-        builder.append("descriptionRes: " + info.descriptionRes + "\n");
+        builder.append("backupAgentName=" + info.backupAgentName + "\n");
+        builder.append("className=" + info.className + "\n");
+        builder.append("compatibleWidthLimitDp=" + info.compatibleWidthLimitDp + "\n");
+        builder.append("dataDir=" + info.dataDir + "\n");
+        builder.append("descriptionRes=" + info.descriptionRes + "\n");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             builder.append("deviceProtectedDataDir " + info.deviceProtectedDataDir + "\n");
         }
-        builder.append("enabled: " + info.enabled + "\n");
-        builder.append("flags: " + info.flags + "\n");
-        builder.append("largestWidthLimitDp: " + info.largestWidthLimitDp + "\n");
-        builder.append("manageSpaceActivityName: " + info.manageSpaceActivityName + "\n");
+        builder.append("enabled=" + info.enabled + "\n");
+        builder.append("flags=" + info.flags + "\n");
+        builder.append("largestWidthLimitDp=" + info.largestWidthLimitDp + "\n");
+        builder.append("manageSpaceActivityName=" + info.manageSpaceActivityName + "\n");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            builder.append("minSdkVersion: " + info.minSdkVersion + "\n");
+            builder.append("minSdkVersion=" + info.minSdkVersion + "\n");
         }
-        builder.append("nativeLibraryDir: " + info.nativeLibraryDir + "\n");
-        builder.append("permission: " + info.permission + "\n");
-        builder.append("processName: " + info.processName + "\n");
-        builder.append("publicSourceDir: " + info.publicSourceDir + "\n");
-        builder.append("requiresSmallestWidthDp: " + info.requiresSmallestWidthDp + "\n");
-        builder.append("sharedLibraryFiles: " + Util.toString(info.sharedLibraryFiles) + "\n");
-        builder.append("sourceDir: " + info.sourceDir + "\n");
+        builder.append("nativeLibraryDir=" + info.nativeLibraryDir + "\n");
+        builder.append("permission=" + info.permission + "\n");
+        builder.append("processName=" + info.processName + "\n");
+        builder.append("publicSourceDir=" + info.publicSourceDir + "\n");
+        builder.append("requiresSmallestWidthDp=" + info.requiresSmallestWidthDp + "\n");
+        builder.append("sharedLibraryFiles=" + Util.toString(info.sharedLibraryFiles) + "\n");
+        builder.append("sourceDir=" + info.sourceDir + "\n");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder.append("splitPublicSourceDirs: " + Util.toString(info.splitPublicSourceDirs) + "\n");
-            builder.append("splitPublicSourceDirs: " + Util.toString(info.splitSourceDirs) + "\n");
+            builder.append("splitPublicSourceDirs=" + Util.toString(info.splitPublicSourceDirs) + "\n");
+            builder.append("splitPublicSourceDirs=" + Util.toString(info.splitSourceDirs) + "\n");
         }
-        builder.append("taskAffinity: " + info.taskAffinity + "\n");
-        builder.append("theme: " + info.theme + "\n");
-        builder.append("uiOptions: " + info.uiOptions + "\n");
-        builder.append("uid: " + info.uid + "\n");
+        builder.append("taskAffinity=" + info.taskAffinity + "\n");
+        builder.append("theme=" + info.theme + "\n");
+        builder.append("uiOptions=" + info.uiOptions + "\n");
+        builder.append("uid=" + info.uid + "\n");
         return builder.toString();
     }
 }

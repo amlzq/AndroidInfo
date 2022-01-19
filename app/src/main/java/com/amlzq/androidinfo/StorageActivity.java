@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Created by amlzq on 2021/7/19.
+ * <p>
  * https://developer.android.com/guide/topics/data/data-storage.html
  */
 
@@ -30,16 +31,16 @@ public class StorageActivity extends Activity {
         // internal storage
         builder.append("INTERNAL STORAGE\n");
         File dir = getDataDir();
-        builder.append("getDataDir():\n" + dir.getAbsolutePath() + "\n");
+        builder.append("getDataDir()=" + dir.getAbsolutePath() + "\n");
 
         dir = getCacheDir();
-        builder.append("getCacheDir():\n" + dir.getAbsolutePath() + "\n");
+        builder.append("getCacheDir()=" + dir.getAbsolutePath() + "\n");
 
         dir = getFilesDir();
-        builder.append("getFilesDir():\n" + dir.getAbsolutePath() + "\n");
+        builder.append("getFilesDir()=" + dir.getAbsolutePath() + "\n");
 
         dir = getCodeCacheDir();
-        builder.append("getCodeCacheDir():\n" + dir.getAbsolutePath() + "\n");
+        builder.append("getCodeCacheDir()=" + dir.getAbsolutePath() + "\n");
 
         builder.append("\n");
 
@@ -47,25 +48,25 @@ public class StorageActivity extends Activity {
         builder.append("EXTERNAL STORAGE\n");
 
         dir = getExternalCacheDir();
-        builder.append("getExternalCacheDir():\n" + dir.getAbsolutePath() + "\n");
+        builder.append("getExternalCacheDir()=" + dir.getAbsolutePath() + "\n");
 
         dir = getExternalFilesDir(Environment.DIRECTORY_DCIM);
-        builder.append("getExternalFilesDir(Environment.DIRECTORY_DCIM):\n" + dir.getAbsolutePath() + "\n");
+        builder.append("getExternalFilesDir(Environment.DIRECTORY_DCIM)=" + dir.getAbsolutePath() + "\n");
 
         dir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
-        builder.append("getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS):\n" + dir.getAbsolutePath() + "\n");
+        builder.append("getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)=" + dir.getAbsolutePath() + "\n");
 
         dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        builder.append("getExternalFilesDir(Environment.DIRECTORY_PICTURES):\n" + dir.getAbsolutePath() + "\n");
+        builder.append("getExternalFilesDir(Environment.DIRECTORY_PICTURES)=" + dir.getAbsolutePath() + "\n");
 
         File[] dirs = getExternalFilesDirs(null);
-        builder.append("getExternalFilesDirs(null)[0]:\n" + dirs[0].getAbsolutePath() + "\n");
+        builder.append("getExternalFilesDirs(null)[0]=" + dirs[0].getAbsolutePath() + "\n");
         if (dirs.length > 1) {
-            builder.append("getExternalFilesDirs(null)[1]:\n" + dirs[1].getAbsolutePath() + "\n");
+            builder.append("getExternalFilesDirs(null)[1]=" + dirs[1].getAbsolutePath() + "\n");
         }
 
         dir = getObbDir();
-        builder.append("getObbDir():\n" + dir.getAbsolutePath() + "\n");
+        builder.append("getObbDir()=" + dir.getAbsolutePath() + "\n");
 
         builder.append("\n");
 
@@ -73,10 +74,10 @@ public class StorageActivity extends Activity {
         builder.append("MediaStore API\n");
 
         Uri mediaScannerUri = MediaStore.getMediaScannerUri();
-        builder.append("mediaScannerUri:\n" + mediaScannerUri + "\n");
+        builder.append("mediaScannerUri=" + mediaScannerUri + "\n");
 
         String version = MediaStore.getVersion(this);
-        builder.append("version:\n" + version + "\n");
+        builder.append("version=" + version + "\n");
 
         builder.append("\n");
 
@@ -84,10 +85,10 @@ public class StorageActivity extends Activity {
         List<StorageVolume> storageVolumes = manager.getStorageVolumes();
         for (int i = 0; i < storageVolumes.size(); i++) {
             StorageVolume volume = storageVolumes.get(i);
-            builder.append("StorageVolume " + i + ": \n" + volume.toString() + "\n");
+            builder.append("StorageVolume " + i + "=" + volume.toString() + "\n");
         }
         StorageVolume volume = manager.getPrimaryStorageVolume();
-        builder.append("getPrimaryStorageVolume: \n" + volume.toString() + "\n");
+        builder.append("getPrimaryStorageVolume=" + volume.toString() + "\n");
 
         TextView textView = (TextView) findViewById(R.id.text_view);
         textView.setText(builder.toString());

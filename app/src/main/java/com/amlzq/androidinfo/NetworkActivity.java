@@ -26,28 +26,28 @@ public class NetworkActivity extends Activity {
         StringBuilder builder = new StringBuilder();
 
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        builder.append("isActiveNetworkMetered: " + connectivityManager.isActiveNetworkMetered() + "\n");
-        builder.append("isDefaultNetworkActive: " + connectivityManager.isDefaultNetworkActive() + "\n");
+        builder.append("isActiveNetworkMetered=" + connectivityManager.isActiveNetworkMetered() + "\n");
+        builder.append("isDefaultNetworkActive=" + connectivityManager.isDefaultNetworkActive() + "\n");
 
         Network[] allNetworks = connectivityManager.getAllNetworks();
         for (int i = 0; i < allNetworks.length; i++) {
-            builder.append("Network " + i + ": " + allNetworks[i].toString() + "\n");
+            builder.append("Network " + i + "=" + allNetworks[i].toString() + "\n");
         }
         builder.append("\n");
 
         Network network = connectivityManager.getActiveNetwork();
         if (network != null) {
-            builder.append("getActiveNetwork.toString: " + network.toString() + "\n");
+            builder.append("getActiveNetwork.toString=" + network.toString() + "\n");
         }
 
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         if (networkInfo != null) {
-            builder.append("getActiveNetworkInfo.toString: " + networkInfo.toString() + "\n");
+            builder.append("getActiveNetworkInfo.toString=" + networkInfo.toString() + "\n");
         }
 
         ProxyInfo proxyInfo = connectivityManager.getDefaultProxy();
         if (proxyInfo != null) {
-            builder.append("getDefaultProxy.toString: " + proxyInfo.toString() + "\n");
+            builder.append("getDefaultProxy.toString=" + proxyInfo.toString() + "\n");
         }
 
         NetworkStatsManager networkStatsManager = (NetworkStatsManager) getSystemService(Context.NETWORK_STATS_SERVICE);

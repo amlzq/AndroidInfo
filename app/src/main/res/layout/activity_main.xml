@@ -41,4 +41,10 @@
         android:layout_height="wrap_content"
         android:onClick="onNetworkClick"
         android:text="Network" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onMemoryClick"
+        android:text="Memory" />
 </LinearLayout>
