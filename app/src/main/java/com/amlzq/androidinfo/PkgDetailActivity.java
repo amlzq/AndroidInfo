@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PermissionGroupInfo;
 import android.content.pm.Signature;
 import android.net.Uri;
 import android.os.Build;
@@ -14,6 +15,7 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.security.MessageDigest;
 
@@ -37,19 +39,9 @@ public class PkgDetailActivity extends Activity {
         ImageView iconView = (ImageView) findViewById(R.id.icon);
         iconView.setImageDrawable(appInfo.loadIcon(manager));
 
-        TextView nameView = (TextView) findViewById(R.id.name);
-        nameView.setText(appInfo.loadLabel(manager));
-
-        TextView pkgView = (TextView) findViewById(R.id.pkg);
-        pkgView.setText(item.packageName);
-
-        TextView versionView = (TextView) findViewById(R.id.version);
-        versionView.setText(item.versionCode + "+" + item.versionName);
-
         StringBuilder builder = new StringBuilder();
         try {
-            final PackageInfo info = manager.getPackageInfo(
-                    item.packageName, PackageManager.GET_SIGNATURES);
+            final PackageInfo info = manager.getPackageInfo(item.packageName, PackageManager.GET_SIGNATURES);
             Signature signature = info.signatures[0];
             byte[] byteArray = signature.toByteArray();
             String md5 = encode("MD5", byteArray);
@@ -70,7 +62,20 @@ public class PkgDetailActivity extends Activity {
         TextView appInfoView = (TextView) findViewById(R.id.app_info);
         appInfoView.setText(toString(appInfo));
 
-        findViewById(R.id.app_details).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.launch).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    Intent intent = manager.getLaunchIntentForPackage(item.packageName);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(PkgDetailActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        findViewById(R.id.details).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = getAppDetailsSettingsIntent(PkgDetailActivity.this, item.packageName);
@@ -115,6 +120,9 @@ public class PkgDetailActivity extends Activity {
 
     private String toString(PackageInfo info) {
         StringBuilder builder = new StringBuilder();
+        builder.append("packageName=" + info.packageName + "\n");
+        builder.append("versionCode=" + info.versionCode + "\n");
+        builder.append("versionName=" + info.versionName + "\n");
         builder.append("activities.length=" + Util.getLength(info.activities) + "\n");
         builder.append("applicationInfo=" + info.applicationInfo + "\n");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
@@ -150,13 +158,12 @@ public class PkgDetailActivity extends Activity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
             builder.append("splitRevisionCodes=" + Util.toString(info.splitRevisionCodes) + "\n");
         }
-        builder.append("versionCode=" + info.versionCode + "\n");
-        builder.append("versionName=" + info.versionName + "\n");
         return builder.toString();
     }
 
     private String toString(ApplicationInfo info) {
         StringBuilder builder = new StringBuilder();
+        builder.append("label=" + info.loadLabel(manager) + "\n");
         builder.append("backupAgentName=" + info.backupAgentName + "\n");
         builder.append("className=" + info.className + "\n");
         builder.append("compatibleWidthLimitDp=" + info.compatibleWidthLimitDp + "\n");
@@ -187,6 +194,12 @@ public class PkgDetailActivity extends Activity {
         builder.append("theme=" + info.theme + "\n");
         builder.append("uiOptions=" + info.uiOptions + "\n");
         builder.append("uid=" + info.uid + "\n");
+        return builder.toString();
+    }
+
+    private String toString(PermissionGroupInfo info) {
+        StringBuilder builder = new StringBuilder();
+//        builder.append("backupAgentName=" + info. + "\n");
         return builder.toString();
     }
 }

@@ -1,6 +1,7 @@
 package com.amlzq.androidinfo;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -63,6 +64,7 @@ public class PackagesAdapter extends BaseAdapter implements Filterable {
             holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.item_package, parent, false);
             holder.mIcon = (ImageView) convertView.findViewById(R.id.icon);
+            holder.mFlag = (View) convertView.findViewById(R.id.flag);
             holder.mAction = (ImageButton) convertView.findViewById(R.id.action);
             holder.mName = (TextView) convertView.findViewById(R.id.name);
             holder.mPkg = (TextView) convertView.findViewById(R.id.pkg);
@@ -87,6 +89,12 @@ public class PackagesAdapter extends BaseAdapter implements Filterable {
         holder.mVersion.setText(item.versionCode + "+" + item.versionName);
         holder.mAction.setTag(item);
         holder.mAction.setOnClickListener(mClickListener);
+        if ((item.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == ApplicationInfo.FLAG_SYSTEM) {
+            // this application is installed in the device's system image.
+            holder.mFlag.setVisibility(View.VISIBLE);
+        } else {
+            holder.mFlag.setVisibility(View.GONE);
+        }
         holder.mItem = item;
     }
 
@@ -98,6 +106,7 @@ public class PackagesAdapter extends BaseAdapter implements Filterable {
 
     final static class ViewHolder {
         ImageView mIcon;
+        View mFlag;
         ImageButton mAction;
         TextView mName;
         TextView mPkg;

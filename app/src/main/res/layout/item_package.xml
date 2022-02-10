@@ -5,14 +5,26 @@
     android:layout_height="match_parent"
     android:descendantFocusability="blocksDescendants">
 
-    <ImageView
-        android:id="@+id/icon"
+    <FrameLayout
+        android:id="@+id/icon_layout"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_centerVertical="true"
-        android:contentDescription="@null"
-        android:scaleType="centerCrop"
-        tools:src="@android:drawable/sym_def_app_icon" />
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            tools:src="@android:drawable/sym_def_app_icon" />
+
+        <View
+            android:id="@+id/flag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#80000000" />
+    </FrameLayout>
 
     <ImageButton
         android:id="@+id/action"
@@ -33,9 +45,9 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginStart="4dp"
-        android:layout_toEndOf="@id/icon"
+        android:layout_toEndOf="@id/icon_layout"
         android:layout_toLeftOf="@id/action"
-        android:layout_toRightOf="@id/icon"
+        android:layout_toRightOf="@id/icon_layout"
         android:layout_toStartOf="@id/action"
         android:orientation="vertical">
 
