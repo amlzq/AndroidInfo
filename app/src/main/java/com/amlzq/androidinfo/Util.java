@@ -1,5 +1,7 @@
 package com.amlzq.androidinfo;
 
+import android.os.Bundle;
+
 import java.util.Arrays;
 
 /**
@@ -23,4 +25,15 @@ public class Util {
         return a.length;
     }
 
+    public static String toString(Bundle bundle) {
+        if (bundle == null) {
+            return "";
+        }
+        StringBuilder builder = new StringBuilder("Bundle[");
+        for (String key : bundle.keySet()) {
+            builder.append(" ").append(key).append("=").append(bundle.get(key)).append(";");
+        }
+        builder.append("]");
+        return builder.toString();
+    }
 }

@@ -3,10 +3,14 @@ package com.amlzq.androidinfo;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.ConfigurationInfo;
+import android.content.pm.InstrumentationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PermissionGroupInfo;
+import android.content.pm.ProviderInfo;
+import android.content.pm.ServiceInfo;
 import android.content.pm.Signature;
 import android.net.Uri;
 import android.os.Build;
@@ -33,36 +37,45 @@ public class PkgDetailActivity extends Activity {
         setContentView(R.layout.activity_pkg_detail);
 
         item = getIntent().getParcelableExtra("item");
-        ApplicationInfo appInfo = item.applicationInfo;
         manager = getPackageManager();
 
         ImageView iconView = (ImageView) findViewById(R.id.icon);
-        iconView.setImageDrawable(appInfo.loadIcon(manager));
+        iconView.setImageDrawable(item.applicationInfo.loadIcon(manager));
 
-        StringBuilder builder = new StringBuilder();
-        try {
-            final PackageInfo info = manager.getPackageInfo(item.packageName, PackageManager.GET_SIGNATURES);
-            Signature signature = info.signatures[0];
-            byte[] byteArray = signature.toByteArray();
-            String md5 = encode("MD5", byteArray);
-            builder.append("MD5=" + md5 + "\n");
-            String sha1 = encode("SHA1", byteArray);
-            builder.append("SHA1=" + sha1 + "\n");
-            String sha256 = encode("SHA256", byteArray);
-            builder.append("SHA256=" + sha256 + "\n");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        TextView signView = (TextView) findViewById(R.id.sign);
-        signView.setText(builder.toString());
+        TextView appInfoView = (TextView) findViewById(R.id.app_info);
+        appInfoView.setText(toString(item.applicationInfo));
 
         TextView pkgInfoView = (TextView) findViewById(R.id.pkg_info);
         pkgInfoView.setText(toString(item));
 
-        TextView appInfoView = (TextView) findViewById(R.id.app_info);
-        appInfoView.setText(toString(appInfo));
+        TextView signView = (TextView) findViewById(R.id.signatures);
+        signView.setText(getSignatures(item.packageName));
 
-        findViewById(R.id.launch).setOnClickListener(new View.OnClickListener() {
+        TextView permView = (TextView) findViewById(R.id.permissions);
+        permView.setText(getPermissions(item.packageName));
+
+        TextView actView = (TextView) findViewById(R.id.activities);
+        actView.setText(getActivities(item.packageName));
+
+        TextView servView = (TextView) findViewById(R.id.services);
+        servView.setText(getServices(item.packageName));
+
+        TextView receView = (TextView) findViewById(R.id.receivers);
+        receView.setText(getReceivers(item.packageName));
+
+        TextView provView = (TextView) findViewById(R.id.providers);
+        provView.setText(getProviders(item.packageName));
+
+        TextView confView = (TextView) findViewById(R.id.configPreferences);
+        confView.setText(getConfigurations(item.packageName));
+
+        TextView metaView = (TextView) findViewById(R.id.metaData);
+        metaView.setText(getMetaData(item.packageName));
+
+        TextView instView = (TextView) findViewById(R.id.instrumentations);
+        instView.setText(getInstrumentation(item.packageName));
+
+        findViewById(R.id.icon).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
@@ -118,52 +131,15 @@ public class PkgDetailActivity extends Activity {
         return builder.toString();
     }
 
-    private String toString(PackageInfo info) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("packageName=" + info.packageName + "\n");
-        builder.append("versionCode=" + info.versionCode + "\n");
-        builder.append("versionName=" + info.versionName + "\n");
-        builder.append("activities.length=" + Util.getLength(info.activities) + "\n");
-        builder.append("applicationInfo=" + info.applicationInfo + "\n");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
-            builder.append("baseRevisionCode=" + info.baseRevisionCode + "\n");
-        }
-        builder.append("configPreferences.length=" + Util.getLength(info.configPreferences) + "\n");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder.append("featureGroups.length=" + Util.getLength(info.featureGroups) + "\n");
-        }
-        builder.append("firstInstallTime=" + info.firstInstallTime + "\n");
-        builder.append("gids=" + Util.toString(info.gids) + "\n");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder.append("installLocation=" + info.installLocation + "\n");
-        }
-        builder.append("instrumentation.length=" + Util.getLength(info.instrumentation) + "\n");
-        builder.append("lastUpdateTime=" + info.lastUpdateTime + "\n");
-        builder.append("packageName=" + info.packageName + "\n");
-        builder.append("permissions.length=" + Util.getLength(info.permissions) + "\n");
-        builder.append("providers.length=" + Util.getLength(info.providers) + "\n");
-        builder.append("receivers.length=" + Util.getLength(info.receivers) + "\n");
-        builder.append("reqFeatures.length=" + Util.getLength(info.reqFeatures) + "\n");
-        builder.append("requestedPermissions=" + Util.toString(info.requestedPermissions) + "\n");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            builder.append("requestedPermissionsFlags=" + Util.toString(info.requestedPermissionsFlags) + "\n");
-        }
-        builder.append("services.length=" + Util.getLength(info.services) + "\n");
-        builder.append("sharedUserId=" + info.sharedUserId + "\n");
-        builder.append("sharedUserLabel=" + info.sharedUserLabel + "\n");
-        builder.append("signatures.length=" + Util.getLength(info.signatures) + "\n");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder.append("splitNames=" + Util.toString(info.splitNames) + "\n");
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
-            builder.append("splitRevisionCodes=" + Util.toString(info.splitRevisionCodes) + "\n");
-        }
-        return builder.toString();
-    }
-
     private String toString(ApplicationInfo info) {
         StringBuilder builder = new StringBuilder();
+        builder.append(info.toString() + "\n");
         builder.append("label=" + info.loadLabel(manager) + "\n");
+        builder.append("labelRes=" + info.labelRes + "\n");
+        builder.append("targetSdkVersion=" + info.targetSdkVersion + "\n");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            builder.append("minSdkVersion=" + info.minSdkVersion + "\n");
+        }
         builder.append("backupAgentName=" + info.backupAgentName + "\n");
         builder.append("className=" + info.className + "\n");
         builder.append("compatibleWidthLimitDp=" + info.compatibleWidthLimitDp + "\n");
@@ -174,11 +150,11 @@ public class PkgDetailActivity extends Activity {
         }
         builder.append("enabled=" + info.enabled + "\n");
         builder.append("flags=" + info.flags + "\n");
+        builder.append("isAppDebuggable=" + ((info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0) + "\n");
+        builder.append("isAppTestOnly=" + ((info.flags & ApplicationInfo.FLAG_TEST_ONLY) != 0) + "\n");
+        builder.append("isAppAllowBackup=" + ((info.flags & ApplicationInfo.FLAG_ALLOW_BACKUP) != 0) + "\n");
         builder.append("largestWidthLimitDp=" + info.largestWidthLimitDp + "\n");
         builder.append("manageSpaceActivityName=" + info.manageSpaceActivityName + "\n");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            builder.append("minSdkVersion=" + info.minSdkVersion + "\n");
-        }
         builder.append("nativeLibraryDir=" + info.nativeLibraryDir + "\n");
         builder.append("permission=" + info.permission + "\n");
         builder.append("processName=" + info.processName + "\n");
@@ -197,9 +173,199 @@ public class PkgDetailActivity extends Activity {
         return builder.toString();
     }
 
-    private String toString(PermissionGroupInfo info) {
+    private String toString(PackageInfo info) {
         StringBuilder builder = new StringBuilder();
-//        builder.append("backupAgentName=" + info. + "\n");
+        builder.append(info.toString() + "\n");
+        builder.append("packageName=" + info.packageName + "\n");
+        builder.append("versionCode=" + info.versionCode + "\n");
+        builder.append("versionName=" + info.versionName + "\n");
+        builder.append("applicationInfo=" + info.applicationInfo + "\n");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            builder.append("baseRevisionCode=" + info.baseRevisionCode + "\n");
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder.append("featureGroups.length=" + Util.getLength(info.featureGroups) + "\n");
+        }
+        builder.append("firstInstallTime=" + info.firstInstallTime + "\n");
+        builder.append("gids=" + Util.toString(info.gids) + "\n");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder.append("installLocation=" + info.installLocation + "\n");
+        }
+        builder.append("lastUpdateTime=" + info.lastUpdateTime + "\n");
+        builder.append("packageName=" + info.packageName + "\n");
+        builder.append("reqFeatures.length=" + Util.getLength(info.reqFeatures) + "\n");
+        builder.append("requestedPermissions=" + Util.toString(info.requestedPermissions) + "\n");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            builder.append("requestedPermissionsFlags=" + Util.toString(info.requestedPermissionsFlags) + "\n");
+        }
+        builder.append("sharedUserId=" + info.sharedUserId + "\n");
+        builder.append("sharedUserLabel=" + info.sharedUserLabel + "\n");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder.append("splitNames=" + Util.toString(info.splitNames) + "\n");
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            builder.append("splitRevisionCodes=" + Util.toString(info.splitRevisionCodes) + "\n");
+        }
+        return builder.toString();
+    }
+
+    private String toString(ActivityInfo info) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(info.toString() + "\n");
+        builder.append("name=" + info.name + "\n");
+        builder.append("processName=" + info.packageName + "\n");
+        builder.append("processName=" + info.processName + "\n");
+        builder.append("permission=" + info.permission + "\n");
+        builder.append("describeContents=" + info.describeContents() + "\n");
+        builder.append("flags=" + Integer.toHexString(info.flags) + "\n");
+        return builder.toString();
+    }
+
+    private String getSignatures(String packageName) {
+        StringBuilder builder = new StringBuilder();
+        try {
+            final PackageInfo info = manager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES);
+            Signature[] signatures = info.signatures;
+            builder.append("signatures.length=" + signatures.length + "\n");
+            byte[] byteArray = signatures[0].toByteArray();
+            String md5 = encode("MD5", byteArray);
+            builder.append("MD5=" + md5 + "\n");
+            String sha1 = encode("SHA1", byteArray);
+            builder.append("SHA1=" + sha1 + "\n");
+            String sha256 = encode("SHA256", byteArray);
+            builder.append("SHA256=" + sha256 + "\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return builder.toString();
+    }
+
+    private String getPermissions(String packageName) {
+        StringBuilder builder = new StringBuilder();
+        try {
+            final PackageInfo info = manager.getPackageInfo(packageName, PackageManager.GET_PERMISSIONS);
+            String[] permissions = info.requestedPermissions;
+            builder.append("permissions.length=" + permissions.length + "\n");
+            for (String item : permissions) {
+                builder.append(item + "\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return builder.toString();
+    }
+
+    private String getActivities(String packageName) {
+        StringBuilder builder = new StringBuilder();
+        try {
+            final PackageInfo info = manager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+            ActivityInfo[] activities = info.activities;
+            builder.append("activities.length=" + activities.length + "\n");
+            for (ActivityInfo item : activities) {
+                builder.append(toString(item));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return builder.toString();
+    }
+
+    private String getServices(String packageName) {
+        StringBuilder builder = new StringBuilder();
+        try {
+            final PackageInfo info = manager.getPackageInfo(packageName, PackageManager.GET_SERVICES);
+            ServiceInfo[] services = info.services;
+            builder.append("services.length=" + services.length + "\n");
+            for (ServiceInfo item : services) {
+                builder.append("name=" + item.name + "\n");
+                builder.append("packageName=" + item.packageName + "\n");
+                builder.append("processName=" + item.processName + "\n");
+                builder.append("permission=" + item.permission + "\n");
+                builder.append("describeContents=" + item.describeContents() + "\n");
+                builder.append("flags=" + Integer.toHexString(item.flags) + "\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return builder.toString();
+    }
+
+    private String getReceivers(String packageName) {
+        StringBuilder builder = new StringBuilder();
+        try {
+            final PackageInfo info = manager.getPackageInfo(packageName, PackageManager.GET_RECEIVERS);
+            ActivityInfo[] receivers = info.receivers;
+            builder.append("receivers.length=" + receivers.length + "\n");
+            for (ActivityInfo item : receivers) {
+                builder.append(toString(item));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return builder.toString();
+    }
+
+    private String getProviders(String packageName) {
+        StringBuilder builder = new StringBuilder();
+        try {
+            final PackageInfo info = manager.getPackageInfo(packageName, PackageManager.GET_PROVIDERS);
+            ProviderInfo[] providers = info.providers;
+            builder.append("providers.length=" + providers.length + "\n");
+            for (ProviderInfo item : providers) {
+                builder.append("name=" + item.name + "\n");
+                builder.append("packageName=" + item.packageName + "\n");
+                builder.append("processName=" + item.processName + "\n");
+                builder.append("describeContents=" + item.describeContents() + "\n");
+                builder.append("flags=" + Integer.toHexString(item.flags) + "\n");
+                builder.append("authority=" + item.authority + "\n");
+                builder.append("readPermission=" + item.readPermission + "\n");
+                builder.append("writePermission=" + item.writePermission + "\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return builder.toString();
+    }
+
+    private String getConfigurations(String packageName) {
+        StringBuilder builder = new StringBuilder();
+        try {
+            final PackageInfo info = manager.getPackageInfo(packageName, PackageManager.GET_CONFIGURATIONS);
+            ConfigurationInfo[] configPreferences = info.configPreferences;
+            builder.append("configPreferences.length=" + configPreferences.length + "\n");
+            for (ConfigurationInfo item : configPreferences) {
+                builder.append("reqNavigation=" + item.reqNavigation + "\n");
+                builder.append("describeContents=" + item.describeContents() + "\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return builder.toString();
+    }
+
+    private String getMetaData(String packageName) {
+        try {
+            final PackageInfo info = manager.getPackageInfo(packageName, PackageManager.GET_META_DATA);
+            Bundle bundle = info.applicationInfo.metaData;
+            return "metaData\n" + Util.toString(bundle) + "\n";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    private String getInstrumentation(String packageName) {
+        StringBuilder builder = new StringBuilder();
+        try {
+            final PackageInfo info = manager.getPackageInfo(packageName, PackageManager.GET_INSTRUMENTATION);
+            InstrumentationInfo[] instrumentations = info.instrumentation;
+            for (InstrumentationInfo item : instrumentations) {
+                builder.append("name=" + item.name + "\n");
+                builder.append("describeContents=" + item.describeContents() + "\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return builder.toString();
     }
 }

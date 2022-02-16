@@ -41,6 +41,7 @@ public class PackagesActivity extends Activity {
         });
 
         final PackageManager manager = getPackageManager();
+//        manager.getInstalledApplications()
         final List<PackageInfo> packages = manager.getInstalledPackages(PackageManager.COMPONENT_ENABLED_STATE_DEFAULT);
         mAdapter = new PackagesAdapter(this, packages);
         mAdapter.setClickListener(new View.OnClickListener() {

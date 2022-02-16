@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
             case R.id.share:
                 Intent share = new Intent(Intent.ACTION_SEND);
                 share.setType("text/plain");
-                share.putExtra(Intent.EXTRA_TEXT, "https://github.com/amlzq/AndroidInfo");
+                share.putExtra(Intent.EXTRA_TEXT, "<a href=\"https://github.com/amlzq/AndroidInfo\">An assistant for developers to visualize the info of Android.</a>");
                 startActivity(share);
                 break;
         }

@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -65,7 +64,6 @@ public class PackagesAdapter extends BaseAdapter implements Filterable {
             convertView = mInflater.inflate(R.layout.item_package, parent, false);
             holder.mIcon = (ImageView) convertView.findViewById(R.id.icon);
             holder.mFlag = (View) convertView.findViewById(R.id.flag);
-            holder.mAction = (ImageButton) convertView.findViewById(R.id.action);
             holder.mName = (TextView) convertView.findViewById(R.id.name);
             holder.mPkg = (TextView) convertView.findViewById(R.id.pkg);
             holder.mVersion = (TextView) convertView.findViewById(R.id.version);
@@ -87,8 +85,8 @@ public class PackagesAdapter extends BaseAdapter implements Filterable {
         holder.mName.setText(item.applicationInfo.loadLabel(manager));
         holder.mPkg.setText(item.packageName);
         holder.mVersion.setText(item.versionCode + "+" + item.versionName);
-        holder.mAction.setTag(item);
-        holder.mAction.setOnClickListener(mClickListener);
+        holder.mIcon.setTag(item);
+        holder.mIcon.setOnClickListener(mClickListener);
         if ((item.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == ApplicationInfo.FLAG_SYSTEM) {
             // this application is installed in the device's system image.
             holder.mFlag.setVisibility(View.VISIBLE);
@@ -107,7 +105,6 @@ public class PackagesAdapter extends BaseAdapter implements Filterable {
     final static class ViewHolder {
         ImageView mIcon;
         View mFlag;
-        ImageButton mAction;
         TextView mName;
         TextView mPkg;
         TextView mVersion;
