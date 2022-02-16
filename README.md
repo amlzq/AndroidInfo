@@ -6,7 +6,11 @@ An assistant for developers to visualize the info of Android.
 - [x] OS build info
 - [x] Telephony info
 - [x] Display info
-- [x] PackageInfo,ApplicationInfo,ActivityInfo,ServiceInfo,ProviderInfo,ConfigurationInfo,InstrumentationInfo
+- [x] PackageInfo
+- [x] ApplicationInfo
+- [x] ActivityInfo, ProviderInfo, ServiceInfo
+- [x] ConfigurationInfo
+- [x] InstrumentationInfo
 - [x] Storage info
 - [x] NetworkInfo
 - [x] MemoryInfo
